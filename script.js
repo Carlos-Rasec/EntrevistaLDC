@@ -51,7 +51,7 @@ function createListItem(appointment) {
     li.innerHTML = `
         <span class="info">
             <strong>${appointment.nome}</strong> (${appointment.congregacao}) - 
-            ${appointment.data} às ${appointment.horario}
+            Contato: ${appointment.contato} -  ${appointment.data} às ${appointment.horario}
         </span>
         <div class="actions">
             <button class="complete-btn" data-action="complete" title="Marcar como Concluído">✓</button>
@@ -68,6 +68,7 @@ function addAppointment(e) {
 
     const nome = document.getElementById('nome-entrevistado').value;
     const congregacao = document.getElementById('congregacao').value;
+    const contato = document.getElementById('contato').value; // 👈 Adicionada a captura do campo contato
     const data = document.getElementById('data-entrevista').value;
     const horario = document.getElementById('horario-entrevista').value;
 
@@ -75,6 +76,7 @@ function addAppointment(e) {
         id: Date.now().toString(), // ID único baseado no timestamp
         nome,
         congregacao,
+        contato, // 👈 Adicionado o campo contato ao objeto
         data,
         horario,
         completed: false
