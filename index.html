@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Entrevistas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agenda de Entrevistas</h1>
+        
+        <form id="appointment-form">
+            <input type="text" id="nome-entrevistado" placeholder="Nome do Entrevistado" required>
+            <input type="text" id="congregacao" placeholder="Congregação" required>
+            <input type="date" id="data-entrevista" required>
+            <input type="time" id="horario-entrevista" required>
+            <button type="submit">Adicionar Entrevista</button>
+        </form>
+
+        <ul id="appointment-list">
+            </ul>
+
+        <button id="clear-completed-btn" style="display: none;">Limpar Concluídos</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
