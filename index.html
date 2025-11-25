@@ -1,30 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda de Entrevistas</title>
+    <title>Agendar Entrevista</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/question_15748642.png">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/question_15748642.png">
 </head>
+
 <body>
     <div class="container">
-        <h1>Agenda de Entrevistas</h1>
-        
+
+        <img src="/icons/question_15748642.png" alt="Ìcone do app" class="icon">
+        <h1>Agendamento de entrevistas</h1>
+
         <form id="appointment-form">
-            <input type="text" id="nome-entrevistado" placeholder="Nome do Entrevistado" required>
+            <input type="text" id="nome-entrevistado" placeholder="Nome do Entrevistado(a)" required>
             <input type="text" id="congregacao" placeholder="Congregação" required>
-            <input type="text" id="contato" placeholder="Contato (Telefone/Email)" required> 
+            <input type="text" id="contato" placeholder="Contato (Telefone/Email)" required>
             <input type="date" id="data-entrevista" required>
             <input type="time" id="horario-entrevista" required>
-            <button type="submit">Adicionar Entrevista</button>
+            <button type="submit">Agendar</button>
         </form>
 
-        <ul id="appointment-list">
+
+        <div id="calendar-container">
+            <h2>🗓️ <span id="mes-ano-atual">Mês e Ano</span></h2>
+            <table id="calendar">
+                <thead>
+                    <tr>
+                        <th>Dom</th>
+                        <th>Seg</th>
+                        <th>Ter</th>
+                        <th>Qua</th>
+                        <th>Qui</th>
+                        <th>Sex</th>
+                        <th>Sáb</th>
+                    </tr>
+                </thead>
+                <tbody id="dias-calendario">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="modal-eventos" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModal()">&times;</span>
+                <h3 id="modal-titulo-data">Entrevistas Agendadas para [Data]</h3>
+                <ul id="lista-eventos">
+                </ul>
+            </div>
+        </div>
+
+        <div id="interList">
+            <h2>Lista de Entrevistas Agendadas: </h2>
+
+            <ul id="appointment-list">
             </ul>
 
-        <button id="clear-completed-btn" style="display: none;">Limpar Concluídos</button>
+            <button id="clear-completed-btn" style="display: none;">Limpar Concluídos</button>
+        </div>
+
     </div>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
