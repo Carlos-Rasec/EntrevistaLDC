@@ -111,28 +111,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Injeta estilo para indicar um círculo azul nos dias com compromisso
-(function injectCalendarStyles() {
-    const css = `
-        /* marcação visual: pequeno círculo azul dentro do dia */
-        .dia-com-compromisso { position: relative; }
-        .dia-com-compromisso::after {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #007bff;
-            bottom: 6px;
-            right: 6px;
-            box-shadow: 0 0 0 2px rgba(0,123,255,0.12);
-        }
-        .dia-com-compromisso:hover { cursor: pointer; filter: brightness(0.95); }
-    `;
-    const style = document.createElement('style');
-    style.setAttribute('data-generated', 'calendar-mark');
-    style.textContent = css;
-    document.head.appendChild(style);
-})();
+// Substitua a função abrirModal existente por esta versão que mostra também o horário
+function abrirModal(data, listaEntrevistas) {
+    const modal = document.getElementById('modal-eventos');
+    const titulo = document.getElementById('modal-titulo-data');
+    const listaEventos = document.getElementById('lista-eventos');
+
+    titulo.textContent = `Entrevistas em ${data.split('-').reverse().join('/')}`;
+    listaEventos.innerHTML = ''; // Limpa a lista anterior
+
+    // Helper: tenta extrair um horário no formato HH:MM da string (ex: "2025-11-25 às 14:00")
+    function extrairHorario(texto) {
+        if (!texto) return '';
+        const match = texto.match(/([01]?\d|2[0-3]):[0-5]\d/);
+        return match ? match[0] : '';
+    }
+
+    if (listaEntrevistas && listaEntrevistas.length > 0) {
+        listaEntrevistas.forEach(entrevista => {
+            const horario = entrevista.horario || extrairHorario(entrevista.data) || '';
+            const horarioTexto = horario ? ` - Horário: ${horario}` : '';
+            const li = document.createElement('li');
+
+            li.innerHTML = `
+                <strong>${entrevista.nome}</strong> (${entrevista.congregacao})<br>
+                Contato: ${entrevista.contato}${horarioTexto}
+            `;
+            listaEventos.appendChild(li);
+        });
+    } else {
+        const li = document.createElement('li');
+        li.textContent = "Nenhuma entrevista agendada para este dia.";
+        listaEventos.appendChild(li);
+    }
+
+    modal.style.display = 'block';
+}
 
 // Garante que sempre que o usuário adicionar/excluir/marcar entrevistas a sincronização aconteça.
 // Adiciona listeners que chamam a função imediatamente após as ações do formulário/lista.
