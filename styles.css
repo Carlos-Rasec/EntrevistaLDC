@@ -1,4 +1,5 @@
 body {
+    display: flex;
     font-family: Arial, sans-serif;
     background-color: #f4f7f6;
     margin: 0;
@@ -33,7 +34,7 @@ h1 {
 #appointment-form button {
     width: 100%;
     padding: 12px;
-    background-color:#1869be;
+    background-color:#0000cbff;
     color: white;
     border: none;
     border-radius: 10px;
@@ -44,7 +45,7 @@ h1 {
 }
 
 #appointment-form button:hover {
-    background-color: #6582fdff;
+    background-color: #1869be;
     
 }
 
@@ -218,4 +219,58 @@ h1 {
     margin: 0 auto 20px auto;
     width: 100px;
     height: 100px;
+}
+
+/* style.css */
+
+/* Garantir que o contêiner do calendário use a largura máxima disponível */
+#calendar-container {
+    /* [Mantenha seus estilos anteriores, como max-width: 90%, margin: 20px auto, etc.] */
+    width: 100%; /* Garante que ele use a largura máxima do seu contêiner pai */
+    box-sizing: border-box; /* Garante que padding e border não adicionem largura extra */
+    padding: 10px; /* Ajuste o padding para não consumir muito espaço em telas pequenas */
+}
+
+/* Forçar a tabela a usar 100% da largura do seu contêiner */
+#calendar {
+    width: 100%;
+    /* Mantenha o border-collapse: collapse; e margin-top: 15px; */
+}
+
+/* style.css */
+
+/* Define que cada célula (dia da semana e dia do mês) deve ter 1/7 da largura da tabela. */
+#calendar th, #calendar td {
+    /* Mantenha seus estilos anteriores, como padding, border, text-align, etc. */
+    
+    /* 🔑 CHAVE: Define que cada célula deve ocupar 1/7 da largura total (aproximadamente 14.28%) */
+    width: calc(100% / 7); 
+    
+    /* Define uma largura mínima e máxima para evitar que as colunas fiquem muito estreitas, se necessário. */
+    min-width: 12px; 
+    
+    /* Garante que o conteúdo não force a célula a se alargar */
+    white-space: nowrap; 
+    
+    /* Importante para a responsividade: */
+    box-sizing: border-box; 
+}
+
+/* style.css */
+
+/* Ajusta o padding e o tamanho da fonte apenas para telas menores que 600px */
+@media screen and (max-width: 600px) {
+    
+    /* Reduz o padding nas células do calendário */
+    #calendar td, #calendar th {
+        padding: 5px; 
+        font-size: 0.9em; /* Opcional: Reduz um pouco o tamanho da fonte */
+    }
+
+    /* Reduz o tamanho do círculo azul para telas pequenas */
+    .dia-com-compromisso::after {
+        width: 6px;
+        height: 6px;
+        bottom: 3px;
+    }
 }
